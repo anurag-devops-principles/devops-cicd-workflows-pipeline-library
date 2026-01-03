@@ -1,6 +1,6 @@
 name: terraform_plan_and_cost_estimation
 
-om:
+on:
   workflow_call:
     inputs:   
       job_name:
