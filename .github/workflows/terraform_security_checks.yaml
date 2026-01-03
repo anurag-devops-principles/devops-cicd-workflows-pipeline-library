@@ -15,7 +15,7 @@ on:
 jobs:
   terraform_security_checks:
     name: ${{ inputs.job_name }}
-    runs-on: ${{ inputs.run_on }}
+    runs-on: ${{ inputs.runs_on }}
     steps:
       - name: checkout repository
         uses: actions/checkout@v4
