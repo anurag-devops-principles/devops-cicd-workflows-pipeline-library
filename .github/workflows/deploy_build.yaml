@@ -20,9 +20,6 @@ on:
       web_app_name:
         required: true
         type: string
-      azure_webapp_package_path:
-        required: true
-        type: string
     secrets:
       AZURE_WEBAPP_PUBLISH_PROFILE:
         required: true
@@ -38,10 +35,13 @@ jobs:
           name: ${{ inputs.artifacts_name }}
           path: ${{ inputs.artifacts_path }}
 
+      - name: Verify Downloaded Package
+        run: ls -R ${{ inputs.artifacts_path }}
+
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
           app-name: ${{ inputs.web_app_name }}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: ${{ inputs.azure_webapp_package_path }}
+          package: ${{ inputs.artifacts_path }}
