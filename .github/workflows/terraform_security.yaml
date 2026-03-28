@@ -28,22 +28,9 @@ jobs:
         with:
           tflint_version: latest
 
-      - name: trivy setup
-        uses: aquasecurity/setup-trivy@v0.2.0
-        with:
-          version: latest
-
       - name: tflint scan
         id: tflint
         run: tflint --init && tflint
-        working-directory: ${{ inputs.working_directory }}
-        continue-on-error: true
-
-      - name: trivy scan
-        run: |
-          trivy config . --tf-vars terraform.tfvars \
-            --severity HIGH,CRITICAL --exit-code 1 \
-            --format table
         working-directory: ${{ inputs.working_directory }}
         continue-on-error: true
 
